@@ -93,9 +93,9 @@ const Roverphotos = () => {
           onChange={(e) => setRover(e.target.value)}
           className="border border-gray-400 rounded px-3 py-2 bg-white text-gray-900 focus:outline-none focus:border-blue-500"
         >
-          <option value="curiosity" className="text-gray-900">Curiosity</option>
-          <option value="opportunity" className="text-gray-900">Opportunity</option>
-          <option value="spirit" className="text-gray-900">Spirit</option>
+          <option value="curiosity" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Curiosity</option>
+          <option value="opportunity" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Opportunity</option>
+          <option value="spirit" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Spirit</option>
         </select>
       </div>
   

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from './Firebase';
 import { NavLink, useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -10,7 +11,8 @@ const Login = () => {
 
     const onLogin = (e) => {
         e.preventDefault();
-        signInWithEmailAndPassword(auth, email, password)
+ 
+       signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 const user = userCredential.user;
                 sessionStorage.setItem('uid', user.uid);
@@ -21,6 +23,12 @@ const Login = () => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
                 console.log(errorCode, errorMessage);
+                // Show SweetAlert for wrong credentials
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Invalid email or password!',
+                });
             });
     }
 
