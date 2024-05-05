@@ -4,6 +4,8 @@ import { auth } from './Firebase';
 import { NavLink, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
+//login
+
 const Login = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
