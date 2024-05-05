@@ -83,10 +83,10 @@ const Roverphotos = () => {
   };
 
   return (
-    <div className='min-h-screen'>
+    <div className='min-h-screen flex items-center justify-center bg-gray-900'>
     <div className="container mx-auto p-4">
       <div className="mb-4">
-        <label htmlFor="rover" className="block mb-1 text-gray-700">Select Rover:</label>
+        <label htmlFor="rover" className="block mb-1 text-white">Select Rover:</label>
         <select
           id="rover"
           value={rover}
@@ -100,9 +100,9 @@ const Roverphotos = () => {
       </div>
   
       <div className="mb-4">
-        <label className="block mb-1">Search By:</label>
+        <label className="block mb-1 text-white">Search By:</label>
         <div>
-          <label htmlFor="searchBySol" className="mr-4">
+          <label htmlFor="searchBySol" className="mr-4 text-white">
             <input
               type="radio"
               id="searchBySol"
@@ -112,7 +112,7 @@ const Roverphotos = () => {
             />
             Martian Sol
           </label>
-          <label htmlFor="searchByEarthDate">
+          <label htmlFor="searchByEarthDate" className='mr-4 text-white'>
             <input
               type="radio"
               id="searchByEarthDate"
@@ -127,18 +127,18 @@ const Roverphotos = () => {
   
       {searchBy === 'sol' ? (
         <div className="mb-4">
-          <label htmlFor="sol" className="block mb-1">Martian Sol:</label>
+          <label htmlFor="sol" className="block mb-1 text-white">Martian Sol:</label>
           <input type="number" id="sol" value={sol} onChange={(e) => setSol(e.target.value)} className="border border-gray-400 rounded px-2 py-1" />
         </div>
       ) : (
         <div className="mb-4">
-          <label htmlFor="earthDate" className="block mb-1">Earth Date:</label>
+          <label htmlFor="earthDate" className="block mb-1 text-white">Earth Date:</label>
           <input type="date" id="earthDate" value={earthDate} onChange={(e) => setEarthDate(e.target.value)} className="border border-gray-400 rounded px-2 py-1" />
         </div>
       )}
   
-      <div className="mb-4">
-        <label htmlFor="camera" className="block mb-1">Camera:</label>
+      <div className="mb-4 ">
+        <label htmlFor="camera" className="block mb-1 ">Camera:</label>
         <select id="camera" value={camera} onChange={(e) => setCamera(e.target.value)} className="border border-gray-400 rounded px-2 py-1">
           <option value="all">All Cameras</option>
           <option value="FHAZ">Front Hazard Avoidance Camera</option>

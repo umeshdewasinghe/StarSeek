@@ -87,7 +87,7 @@ const Signup = () => {
                 </form>
                 <p className="mt-4 text-sm text-gray-900">
                     Already have an account?{' '}
-                    <NavLink to="/" className="font-semibold text-blue-500 hover:underline">
+                    <NavLink to="/login" className="font-semibold text-blue-500 hover:underline">
                         Sign in
                     </NavLink>
                 </p>
