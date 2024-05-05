@@ -83,6 +83,7 @@ const Roverphotos = () => {
   };
 
   return (
+    <div className='min-h-screen'>
     <div className="container mx-auto p-4">
       <div className="mb-4">
         <label htmlFor="rover" className="block mb-1 text-gray-700">Select Rover:</label>
@@ -97,7 +98,7 @@ const Roverphotos = () => {
           <option value="spirit" className="text-gray-900">Spirit</option>
         </select>
       </div>
-
+  
       <div className="mb-4">
         <label className="block mb-1">Search By:</label>
         <div>
@@ -123,6 +124,7 @@ const Roverphotos = () => {
           </label>
         </div>
       </div>
+  
       {searchBy === 'sol' ? (
         <div className="mb-4">
           <label htmlFor="sol" className="block mb-1">Martian Sol:</label>
@@ -134,6 +136,7 @@ const Roverphotos = () => {
           <input type="date" id="earthDate" value={earthDate} onChange={(e) => setEarthDate(e.target.value)} className="border border-gray-400 rounded px-2 py-1" />
         </div>
       )}
+  
       <div className="mb-4">
         <label htmlFor="camera" className="block mb-1">Camera:</label>
         <select id="camera" value={camera} onChange={(e) => setCamera(e.target.value)} className="border border-gray-400 rounded px-2 py-1">
@@ -149,6 +152,7 @@ const Roverphotos = () => {
           <option value="MINITES">Miniature Thermal Emission Spectrometer (Mini-TES)</option>
         </select>
       </div>
+  
       <button onClick={handleFetchPhotos} className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Fetch Photos</button>
       {loading && <p>Loading...</p>}
       {manifest && (
@@ -171,6 +175,8 @@ const Roverphotos = () => {
         ))}
       </div>
     </div>
+  </div>
+  
   );
 };
 

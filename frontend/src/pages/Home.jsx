@@ -16,9 +16,9 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="fixed top-0 left-0 w-full bg-white shadow-md z-10">
+    <nav className="fixed top-0 left-0 w-full bg-black shadow-md z-10 min-h-screen"> {/* Changed bg-white to bg-black */}
       <div className="container mx-auto px-4 py-8">
-        <h2 className="text-2xl font-bold mb-4">NASA API Explorer</h2>
+        <h2 className="text-2xl font-bold mb-4 text-white">NASA API Explorer</h2> {/* Changed text color to white */}
         <div className="flex justify-center">
           <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mr-4" onClick={redirectToMarsRover}>Mars Rover</button>
           <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded" onClick={redirectToDailyPhotos}>Daily Photos</button>
