@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom'; // Import Link from React Router
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -9,14 +8,14 @@ const Navbar = () => {
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center py-4">
           {/* Brand Logo */}
-          <Link to="/" className="text-white text-xl font-bold">Logo</Link> {/* Replace anchor tag with Link */}
+          <a href="#" className="text-white text-xl font-bold">Logo</a>
           
           {/* Menu Items (for medium and large screens) */}
           <ul className="hidden md:flex space-x-4">
-            <li><Link to="/" className="text-gray-300 hover:text-white">Home</Link></li>
-            <li><Link to="/about" className="text-gray-300 hover:text-white">About</Link></li>
-            <li><Link to="/services" className="text-gray-300 hover:text-white">Services</Link></li>
-            <li><Link to="/contact" className="text-gray-300 hover:text-white">Contact</Link></li>
+            <li><a href="#" className="text-gray-300 hover:text-white">Home</a></li>
+            <li><a href="#" className="text-gray-300 hover:text-white">About</a></li>
+            <li><a href="#" className="text-gray-300 hover:text-white">Services</a></li>
+            <li><a href="#" className="text-gray-300 hover:text-white">Contact</a></li>
           </ul>
           
           {/* Mobile Menu Toggle */}
@@ -36,10 +35,10 @@ const Navbar = () => {
         {isMobileMenuOpen && (
           <div className="md:hidden">
             <ul className="flex flex-col space-y-4">
-              <li><Link to="/" className="text-gray-300 hover:text-white">Home</Link></li>
-              <li><Link to="/about" className="text-gray-300 hover:text-white">About</Link></li>
-              <li><Link to="/services" className="text-gray-300 hover:text-white">Services</Link></li>
-              <li><Link to="/contact" className="text-gray-300 hover:text-white">Contact</Link></li>
+              <li><a href="#" className="text-gray-300 hover:text-white">Home</a></li>
+              <li><a href="#" className="text-gray-300 hover:text-white">About</a></li>
+              <li><a href="#" className="text-gray-300 hover:text-white">Services</a></li>
+              <li><a href="#" className="text-gray-300 hover:text-white">Contact</a></li>
             </ul>
           </div>
         )}

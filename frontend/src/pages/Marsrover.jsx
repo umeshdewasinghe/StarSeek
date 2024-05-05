@@ -1,16 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 const Roverphotos = () => {
   const [rover, setRover] = useState('curiosity');
+  const [prevRover, setPrevRover] = useState('curiosity');
   const [sol, setSol] = useState('');
+  const [prevSol, setPrevSol] = useState('');
   const [earthDate, setEarthDate] = useState('');
+  const [prevEarthDate, setPrevEarthDate] = useState('');
   const [searchBy, setSearchBy] = useState('sol');
+  const [prevSearchBy, setPrevSearchBy] = useState('sol');
   const [camera, setCamera] = useState('all');
+  const [prevCamera, setPrevCamera] = useState('all');
   const [photos, setPhotos] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [manifest, setManifest] = useState(null);
+  const [showTransition, setShowTransition] = useState(false); // State to control transition
 
   const apiKey = 'cFvKDneuefqf41AfVI4eczTWCV5ch5CuQW1Jdcxo';
 
@@ -35,8 +42,25 @@ const Roverphotos = () => {
         axios.get(`https://api.nasa.gov/mars-photos/api/v1/manifests/${rover}?api_key=${apiKey}`)
       ]);
 
-      setPhotos(photosResponse.data.photos);
-      setManifest(manifestResponse.data.photo_manifest);
+      if (photosResponse.data.photos.length === 0) {
+        // Display SweetAlert notification if no photos found
+        Swal.fire({
+          icon: 'warning',
+          title: 'No Photos Found',
+          text: 'No photos found for the selected criteria.',
+        });
+      } else {
+        setPhotos(photosResponse.data.photos);
+        setManifest(manifestResponse.data.photo_manifest);
+        setShowTransition(true); // Set to true after photos are fetched
+
+        // Update previous inputs
+        setPrevRover(rover);
+        setPrevSol(sol);
+        setPrevEarthDate(earthDate);
+        setPrevSearchBy(searchBy);
+        setPrevCamera(camera);
+      }
     } catch (error) {
       setError('Error fetching photos. Please try again.');
     } finally {
@@ -44,20 +68,36 @@ const Roverphotos = () => {
     }
   };
 
-  useEffect(() => {
-    fetchPhotos();
-  }, [rover]);
+  // Function to handle fetchPhotos with empty inputs
+  const handleFetchPhotos = () => {
+    if (!rover || (!sol && searchBy === 'sol') || (!earthDate && searchBy === 'earthDate')) {
+      // Display SweetAlert notification if any required input is empty
+      Swal.fire({
+        icon: 'warning',
+        title: 'Empty Fields',
+        text: 'Please fill in all required fields before fetching photos.',
+      });
+    } else {
+      fetchPhotos();
+    }
+  };
 
   return (
     <div className="container mx-auto p-4">
       <div className="mb-4">
-        <label htmlFor="rover" className="block mb-1">Select Rover:</label>
-        <select id="rover" value={rover} onChange={(e) => setRover(e.target.value)} className="border border-gray-400 rounded px-2 py-1">
-          <option value="curiosity">Curiosity</option>
-          <option value="opportunity">Opportunity</option>
-          <option value="spirit">Spirit</option>
+        <label htmlFor="rover" className="block mb-1 text-gray-700">Select Rover:</label>
+        <select
+          id="rover"
+          value={rover}
+          onChange={(e) => setRover(e.target.value)}
+          className="border border-gray-400 rounded px-3 py-2 bg-white text-gray-900 focus:outline-none focus:border-blue-500"
+        >
+          <option value="curiosity" className="text-gray-900">Curiosity</option>
+          <option value="opportunity" className="text-gray-900">Opportunity</option>
+          <option value="spirit" className="text-gray-900">Spirit</option>
         </select>
       </div>
+
       <div className="mb-4">
         <label className="block mb-1">Search By:</label>
         <div>
@@ -109,7 +149,7 @@ const Roverphotos = () => {
           <option value="MINITES">Miniature Thermal Emission Spectrometer (Mini-TES)</option>
         </select>
       </div>
-      <button onClick={fetchPhotos} className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Fetch Photos</button>
+      <button onClick={handleFetchPhotos} className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Fetch Photos</button>
       {loading && <p>Loading...</p>}
       {manifest && (
         <div className="mt-4">
@@ -124,7 +164,8 @@ const Roverphotos = () => {
         </div>
       )}
       {error && <p className="text-red-500">{error}</p>}
-      <div className="mt-4 grid grid-cols-2 gap-4">
+      {/* Apply transition to the grid */}
+      <div className={`mt-4 grid grid-cols-2 gap-4 transition-opacity duration-500 ${showTransition ? 'opacity-100' : 'opacity-0'}`}>
         {photos.map(photo => (
           <img key={photo.id} src={photo.img_src} alt={`Mars Rover Photo - Sol ${photo.sol}`} className="max-w-full h-auto mb-4" />
         ))}
