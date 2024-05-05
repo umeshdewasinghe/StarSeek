@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const RoverPhotos = () => {
+const Roverphotos = () => {
+  const [rover, setRover] = useState('curiosity');
   const [sol, setSol] = useState('');
   const [earthDate, setEarthDate] = useState('');
   const [searchBy, setSearchBy] = useState('sol');
@@ -9,6 +10,7 @@ const RoverPhotos = () => {
   const [photos, setPhotos] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [manifest, setManifest] = useState(null);
 
   const apiKey = 'cFvKDneuefqf41AfVI4eczTWCV5ch5CuQW1Jdcxo';
 
@@ -16,7 +18,7 @@ const RoverPhotos = () => {
     try {
       setLoading(true);
       setError('');
-      let apiUrl = `https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?api_key=${apiKey}`;
+      let apiUrl = `https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}/photos?api_key=${apiKey}`;
 
       if (searchBy === 'sol' && sol !== '') {
         apiUrl += `&sol=${sol}`;
@@ -28,8 +30,13 @@ const RoverPhotos = () => {
         apiUrl += `&camera=${camera}`;
       }
 
-      const response = await axios.get(apiUrl);
-      setPhotos(response.data.photos);
+      const [photosResponse, manifestResponse] = await Promise.all([
+        axios.get(apiUrl),
+        axios.get(`https://api.nasa.gov/mars-photos/api/v1/manifests/${rover}?api_key=${apiKey}`)
+      ]);
+
+      setPhotos(photosResponse.data.photos);
+      setManifest(manifestResponse.data.photo_manifest);
     } catch (error) {
       setError('Error fetching photos. Please try again.');
     } finally {
@@ -37,9 +44,20 @@ const RoverPhotos = () => {
     }
   };
 
+  useEffect(() => {
+    fetchPhotos();
+  }, [rover]);
+
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Mars Rover Photos</h1>
+      <div className="mb-4">
+        <label htmlFor="rover" className="block mb-1">Select Rover:</label>
+        <select id="rover" value={rover} onChange={(e) => setRover(e.target.value)} className="border border-gray-400 rounded px-2 py-1">
+          <option value="curiosity">Curiosity</option>
+          <option value="opportunity">Opportunity</option>
+          <option value="spirit">Spirit</option>
+        </select>
+      </div>
       <div className="mb-4">
         <label className="block mb-1">Search By:</label>
         <div>
@@ -93,14 +111,26 @@ const RoverPhotos = () => {
       </div>
       <button onClick={fetchPhotos} className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Fetch Photos</button>
       {loading && <p>Loading...</p>}
+      {manifest && (
+        <div className="mt-4">
+          <h2 className="text-xl font-semibold mb-2">Mission Manifest</h2>
+          <p>Name: {manifest.name}</p>
+          <p>Landing Date: {manifest.landing_date}</p>
+          <p>Launch Date: {manifest.launch_date}</p>
+          <p>Status: {manifest.status}</p>
+          <p>Max Sol: {manifest.max_sol}</p>
+          <p>Max Date: {manifest.max_date}</p>
+          <p>Total Photos: {manifest.total_photos}</p>
+        </div>
+      )}
       {error && <p className="text-red-500">{error}</p>}
-      <div className="mt-4">
+      <div className="mt-4 grid grid-cols-2 gap-4">
         {photos.map(photo => (
-          <img key={photo.id} src={photo.img_src} alt={`Mars Rover Photo - Sol ${photo.sol}`} className="w-full mb-4" />
+          <img key={photo.id} src={photo.img_src} alt={`Mars Rover Photo - Sol ${photo.sol}`} className="max-w-full h-auto mb-4" />
         ))}
       </div>
     </div>
   );
 };
 
-export default RoverPhotos;
+export default Roverphotos;
