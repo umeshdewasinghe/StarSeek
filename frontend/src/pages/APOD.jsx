@@ -27,9 +27,9 @@ const APOD = () => {
   };
 
   return (
-    <div className="container mx-auto py-8">
+<div className="container mx-auto py-8">
       <h1 className="text-3xl font-bold mb-4">Astronomy Picture of the Day</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="mb-4">
         <input
           type="date"
           value={date}
@@ -38,15 +38,17 @@ const APOD = () => {
         />
         <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Search</button>
       </form>
-      {loading && <p className="mt-4">Loading...</p>}
-      {error && <p className="text-red-500 mt-4">{error}</p>}
-      {apodData && (
-        <div className="mt-8">
-          <h2 className="text-xl font-bold mb-2">{apodData.title}</h2>
-          <img src={apodData.url} alt={apodData.title} className="max-w-full h-auto" />
-          <p className="mt-4">{apodData.explanation}</p>
-        </div>
-      )}
+      <div className="bg-white shadow-lg p-8">
+        {loading && <p className="mt-4">Loading...</p>}
+        {error && <p className="text-red-500 mt-4">{error}</p>}
+        {apodData && (
+          <div className="mt-8">
+            <h2 className="text-xl font-bold mb-2">{apodData.title}</h2>
+            <img src={apodData.url} alt={apodData.title} className="max-w-full h-auto" />
+            <p className="mt-4">{apodData.explanation}</p>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

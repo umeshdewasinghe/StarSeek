@@ -38,7 +38,7 @@ const Signup = () => {
     return (
         <main className="min-h-screen flex items-center justify-center bg-gray-900">
             <section className="bg-white rounded-lg shadow-lg p-8 mb-5">
-                <h1 className="text-2xl font-bold mb-4 text-gray-900">FocusApp</h1>
+                <h1 className="text-2xl font-bold mb-4 text-gray-900 text-center" >Register</h1>
                 <form>
                     <div className="mb-5">
                         <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-700">Email</label>
