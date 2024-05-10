@@ -86,7 +86,7 @@ const Roverphotos = () => {
     <main className="min-h-screen flex items-center justify-center bg-gray-900">
       <section className="bg-white rounded-lg shadow-lg p-8">
         <div className="text-center mb-6">
-          <p className="text-3xl font-bold text-gray-900">Rover Photos</p>
+          <p className="text-3xl font-bold text-gray-900">Rover Photos </p>
         </div>
         <div className="container mx-auto p-4">
           <div className="mb-4">
