@@ -7,7 +7,7 @@ const APOD = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const apiKey = 'cFvKDneuefqf41AfVI4eczTWCV5ch5CuQW1Jdcxo'; // Replace 'YOUR_API_KEY' with your actual API key from NASA
+  const apiKey = 'cFvKDneuefqf41AfVI4eczTWCV5ch5CuQW1Jdcxo'; 
 
   const fetchAPOD = async () => {
     setLoading(true);
@@ -27,7 +27,7 @@ const APOD = () => {
   };
 
   return (
-<div className="container mx-auto py-8">
+<div className="container mx-auto py-8 min-h-screen">
       <h1 className="text-3xl font-bold mb-4">Astronomy Picture of the Day</h1>
       <form onSubmit={handleSubmit} className="mb-4">
         <input
