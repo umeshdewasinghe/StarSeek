@@ -143,7 +143,7 @@ const Roverphotos = () => {
 
       <div className="mb-4">
         <label htmlFor="camera" className="block mb-1 text-gray-700">Camera:</label>
-        <select id="camera" value={camera} onChange={(e) => setCamera(e.target.value)} className="border border-gray-400 rounded">
+        <select id="camera" value={camera} onChange={(e) => setCamera(e.target.value)} className="border border-gray-400 rounded px-2 py-1">
           <option value="all">All Cameras</option>
           <option value="FHAZ">Front Hazard Avoidance Camera</option>
           <option value="RHAZ">Rear Hazard Avoidance Camera</option>
