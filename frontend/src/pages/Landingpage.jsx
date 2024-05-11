@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import Heroimg from '../assets/images/herosection.jpeg';
+import Heroimg from '../assets/images/Herosection.jpeg';
 import Dyingstar from '../assets/images/dyingstar.jpeg';
 import Blackhole from '../assets/images/blackhole.gif';
 
