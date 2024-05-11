@@ -10,8 +10,8 @@ const Landingpage = () => {
 
   const handleScroll = () => {
     window.scrollTo({
-      top: window.innerHeight, // Adjust this value as needed
-      behavior: 'smooth', // This makes the scrolling smooth
+      top: window.innerHeight, 
+      behavior: 'smooth', 
     });
   };
 
