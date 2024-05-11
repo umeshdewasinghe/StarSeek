@@ -17,7 +17,7 @@ const Roverphotos = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [manifest, setManifest] = useState(null);
-  const [showTransition, setShowTransition] = useState(false); // State to control transition
+  const [showTransition, setShowTransition] = useState(false); 
 
   const apiKey = 'cFvKDneuefqf41AfVI4eczTWCV5ch5CuQW1Jdcxo';
 
