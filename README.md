@@ -1,6 +1,13 @@
 # Star Seeker
 Welcome to Star Seeker! This website provides astronomy photo of the day and the photos taken by mars rovers on various missions using NASA's open apis.
 
+### API endpoints used
+1. Astronomy Photo of the day
+2. Mars Rover Photos
+
+### Deployment link
+https://assignment-02-umeshdewasinghe.vercel.app/
+
 ## Setup Instructions
 
 ### 1. Get Started:
